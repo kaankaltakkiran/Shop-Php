@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   </head>
   <body>
@@ -13,9 +13,17 @@
     <div class="container">
   <div class="row justify-content-center mt-3">
   <div class="col-6">
-
+  <?php 
+if (isset($_POST['form_email'])) {
+  header("location: login.php");
+}
+?>
 <form method="POST">
 <h1 class="text-center text-danger">Register</h1>
+<div class="form-floating mb-3">
+  <input type="text" name="form_name" class="form-control">
+  <label>Name</label>
+</div>
   <div class="form-floating mb-3">
   <input type="email" name="form_email" class="form-control">
   <label>Email</label>
@@ -36,12 +44,14 @@
 <?php
 if(isset($_POST['form_email'])){
   require_once('db.php');
+  $name = $_POST['form_name'];
   $email = $_POST['form_email'];
   $password = $_POST['form_password'];
   $password = password_hash($password, PASSWORD_DEFAULT);   
 
-  $sql = "INSERT INTO users (useremail,userpassword) VALUES (:form_email,'$password')";
+  $sql = "INSERT INTO users (username,useremail,userpassword) VALUES (:form_name,:form_email,'$password')";
   $SORGU = $DB->prepare($sql);
+  $SORGU->bindParam(':form_name',  $name);
   $SORGU->bindParam(':form_email',  $email);
 
   $SORGU->execute();

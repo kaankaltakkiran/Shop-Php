@@ -1,3 +1,7 @@
+<?php
+@session_start();
+require 'loginControl.php';
+?>
 <!doctype html>
 <html lang="en">
   <head>
