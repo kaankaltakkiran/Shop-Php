@@ -1,3 +1,6 @@
+<?php
+@session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,18 +18,22 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
+      <?php if ($_SESSION['isLogin'] == 1) { ?>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="index.php">Home</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
+        </li>
+        <?php } ?>
+        <?php if ($_SESSION['isLogin'] == 0) { ?>
         <li class="nav-item">
           <a class="nav-link" href="register.php">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="login.php">Login</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="logout.php">Logout</a>
-        </li>
+        <?php } ?>
       </ul>
     </div>
   </div>
