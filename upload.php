@@ -3,6 +3,11 @@
 if (isset($_FILES['my_image'])) {
 	require_once('db.php');
 
+ $productName = $_POST['form_productname'];
+ $productDescription = $_POST['form_productdescription'];
+ $price = $_POST['form_price'];
+ $stock = $_POST['form_stock'];
+
 
 /* 	echo "<pre>";
 	print_r($_FILES['image']);
@@ -24,12 +29,17 @@ if (isset($_FILES['my_image'])) {
 				$img_upload_path = 'uploads/'.$new_img_name;
 				move_uploaded_file($tmp_name, $img_upload_path);
 
-    $sql = "INSERT INTO products (productimg) VALUES ('$new_img_name')";
+    $sql = "INSERT INTO products (productname,productdescription,price,stock,productimg) VALUES (:form_productname,:form_productdescription,:form_price,:form_stock,'$new_img_name')";
     $SORGU = $DB->prepare($sql);
+		$SORGU->bindParam(':form_productname',  $productName);
+    $SORGU->bindParam(':form_productdescription', $productDescription);
+		$SORGU->bindParam(':form_price', $price);
+		$SORGU->bindParam(':form_stock', $stock);
 
 
-    header("Location: index.php");
+   
     $SORGU->execute();
+		header("Location: index.php");
 			}else {
 				$em = "You can't upload files of this type";
 		        header("Location: index.php?error=$em");
