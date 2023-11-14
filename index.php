@@ -11,12 +11,13 @@ require 'loginControl.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   </head>
   <body>
-
-    <?php
+<?php
 require_once('navbar.php');
 require_once('db.php');
-
-
+?>
+  <div class='container mt-5'>
+    <div class='row g-4'>
+<?php
 $SORGU = $DB->prepare("SELECT * FROM products");
 $SORGU->execute();
 $products = $SORGU->fetchAll(PDO::FETCH_ASSOC);
@@ -24,9 +25,7 @@ $products = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 
 foreach($products as $product) {
     echo "
-    <div class='container mt-5'>
-    <div class='row row-cols-1 row-cols-md-3 g-4'>
-    <div class='col'>
+    <div class='col-md-4'>
       <div class='card h-100'>
       <a href='product.php?id={$product['productid']}'><img src='uploads/{$product['productimg']}' class='card-img-top' alt='...'></a>
         <div class='card-body'>
@@ -40,12 +39,13 @@ foreach($products as $product) {
       </div>
       </div>
     </div>
-    </div>
-    </div>
+   
     
     ";
 }
 ?>
+ </div>
+    </div>
 <?php if ($_SESSION['rol'] == 2) { ?>
 <div class="container">
   <div class="row justify-content-center mt-3">
