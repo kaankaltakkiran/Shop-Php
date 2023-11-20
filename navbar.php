@@ -30,7 +30,7 @@
           <a class="nav-link" aria-current="page" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="favorite.php">Favorites <span class="badge text-bg-danger"><?php echo count($favorites) ?></span></a>
+          <a class="nav-link <?= ($activePage == 'favorite') ? 'active':''; ?>" href="favorite.php">Favorites <span class="badge text-bg-danger"><?php echo count($favorites) ?></span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Logout</a>
@@ -38,10 +38,10 @@
         <?php } ?>
         <?php if ($_SESSION['isLogin'] == 0) { ?>
         <li class="nav-item">
-          <a class="nav-link" href="register.php">Register</a>
+          <a class="nav-link  <?= ($activePage == 'register') ? 'active':''; ?>" href="register.php">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
+          <a class="nav-link  <?= ($activePage == 'login') ? 'active':''; ?>" href="login.php">Login</a>
         </li>
         <?php } ?>
       </ul>

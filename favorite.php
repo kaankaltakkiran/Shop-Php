@@ -1,5 +1,6 @@
 <?php
 @session_start();
+$activePage="favorite";
 ?>
 <!doctype html>
 <html lang="en">
