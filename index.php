@@ -15,6 +15,53 @@ require 'loginControl.php';
 require_once('navbar.php');
 require_once('db.php');
 ?>
+
+<?php
+require('db.php');
+//!Favoriye ekle butonına basıldığında
+if(isset($_POST['add_to_fav'])){
+   $product_name = $_POST['product_name'];
+   $product_price = $_POST['product_price'];
+   $product_image = $_POST['product_image'];
+
+   //!Ürün ismine göre veritabanında arama yap
+  $sql = "SELECT * FROM favorites WHERE productname = '$product_name'";
+  $SORGU = $DB->prepare($sql);
+  $SORGU->execute();
+  $favorites= $SORGU->fetchAll(PDO::FETCH_ASSOC);
+   //!Eğer ürün varsa 1 yoksa 0 
+   if(count($favorites) == 1){
+      $message[] = 'Product Already Added To Favorite';
+   }else{
+    //!Ürün yoksa veritabanına ekle
+      $sql = "INSERT INTO favorites (productname, productprice, productimage) VALUES(:product_name, :product_price, :product_image)";
+      $SORGU = $DB->prepare($sql);
+
+      $SORGU->bindParam(':product_name',  $product_name);
+      $SORGU->bindParam(':product_price',  $product_price);
+      $SORGU->bindParam(':product_image',  $product_image); 
+      $SORGU->execute();
+      $message[] = 'Product Added To Favorite Succesfully';
+      //!İndex sayfasında sekronizasyonu sağlamak için sayfayı yenile
+      header("Refresh:0");
+    }
+}
+?>
+<?php
+//!Mesajları ekrana yazdır
+if(isset($message)){
+   foreach($message as $message){
+      echo '
+      <div class="container">  
+  <div class="alert mt-3 text-center alert-info alert-dismissible fade show" role="alert">
+  '.$message.'
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  </div>
+  ';
+   };
+};
+?>
   <div class='container mt-5'>
     <div class='row g-4'>
 <?php
@@ -26,21 +73,27 @@ $products = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 foreach($products as $product) {
     echo "
     <div class='col-md-4'>
+    <form action='' method='post'>
       <div class='card h-100'>
       <a href='product.php?id={$product['productid']}'><img src='uploads/{$product['productimg']}' class='card-img-top' alt='...'></a>
+      <input type='hidden' name='product_image' value='{$product['productimg']}'>
         <div class='card-body'>
           <h5 class='card-title'>{$product['productname']}</h5>
+          <input type='hidden' name='product_name' value='{$product['productname']}'>
           <p class='card-text'>Product Name: {$product['productdescription']}</p>
+          <input type='hidden' value='{$product['productdescription']}'>
           <p class='card-text'>Product Price: {$product['price']}</p>
+          <input type='hidden' name='product_price' value='{$product['price']}'>
           <p class='card-text'>Product Stock: {$product['stock']}</p>
+          <input type='hidden' name='product_stock' value='{$product['stock']}'>
+           <input type='submit' class='btn btn-danger' value='Add To Favorite' name='add_to_fav'>
         </div>
+        </form>
         <div class='card-footer'>
         <small class='text-body-secondary'>{$product['productdate']}</small>
       </div>
       </div>
-    </div>
-   
-    
+    </div> 
     ";
 }
 ?>

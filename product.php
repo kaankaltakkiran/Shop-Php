@@ -37,12 +37,10 @@ echo "
 echo "
 <div class='container'>
 <div class='row text-center'>
-<img src='uploads/{$products[0]['productimg']}' class='card-img-top' alt='...'>
+<img src='uploads/{$products[0]['productimg']}' class='card-img-top' width='700' height='400' alt='{$products[0]['productdescription']}'>
 </div>
 </div>
 ";
-
-/* echo nl2br($DUYURU[0]['announcement']); */
 echo "<br><hr>";
 echo "
 <div class='container'>
@@ -51,7 +49,6 @@ echo "
 </div>
 </div>
 ";
-/* echo "<i class='text-muted'>" . date("d.m.Y", strtotime($DUYURU[0]['startingdate'])) . " Tarihinde yayınlanmıştır.</i>"; */
 ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
