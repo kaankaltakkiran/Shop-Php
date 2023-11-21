@@ -27,8 +27,9 @@ if(isset($_POST['add_to_fav'])){
    $user_id = $_SESSION['id'];
 
    //!Ürün ismine göre veritabanında arama yap
-  $sql = "SELECT * FROM favorites WHERE productname = '$product_name'";
+  $sql = "SELECT * FROM favorites WHERE productname = '$product_name'AND userid = :id";
   $SORGU = $DB->prepare($sql);
+  $SORGU->bindParam(':id', $user_id); 
   $SORGU->execute();
   $favorites= $SORGU->fetchAll(PDO::FETCH_ASSOC);
    //!Eğer ürün varsa 1 yoksa 0 
