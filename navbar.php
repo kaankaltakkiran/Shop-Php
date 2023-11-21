@@ -29,7 +29,7 @@
       <ul class="navbar-nav">
       <?php if ($_SESSION['isLogin'] == 1) { ?>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="index.php">Home</a>
+          <a class="nav-link  <?= ($activePage == 'index') ? 'active':''; ?>" href="index.php">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link <?= ($activePage == 'favorite') ? 'active':''; ?>" href="favorite.php">Favorites <span class="badge text-bg-danger"><?php echo count($favorites) ?></span></a>

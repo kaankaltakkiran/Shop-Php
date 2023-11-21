@@ -11,6 +11,7 @@ CREATE TABLE `favorites` (
   `productname` varchar(255) NOT NULL,
   `productprice` varchar(255) NOT NULL,
   `productimage` varchar(255) NOT NULL,
+  `userid` int(11) NOT NULL,
   PRIMARY KEY (`productid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
@@ -52,4 +53,4 @@ INSERT INTO `users` (`userid`, `username`, `useremail`, `userpassword`, `role`) 
 (1,	'Ahmet Yılmaz',	'ahmet@gmail.com',	'$2y$10$SHJAe.TDg5jp4S/GJ9p1..N/K9Bcw9OvDwaEzyQKQm2aHtq5wcZ2.',	1),
 (2,	'Admin',	'admin@gmail.com',	'$2y$10$T.V40CsyhHOj/pT922VwrOcRBksyCzvHfeAJNf/oOgdJQQKXzU9WC',	2);
 
--- 2023-11-20 18:32:15
+-- 2023-11-21 06:43:54
