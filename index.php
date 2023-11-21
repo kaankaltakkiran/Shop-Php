@@ -23,6 +23,7 @@ if(isset($_POST['add_to_fav'])){
    $product_name = $_POST['product_name'];
    $product_price = $_POST['product_price'];
    $product_image = $_POST['product_image'];
+   $user_id = $_SESSION['id'];
 
    //!Ürün ismine göre veritabanında arama yap
   $sql = "SELECT * FROM favorites WHERE productname = '$product_name'";
@@ -34,12 +35,13 @@ if(isset($_POST['add_to_fav'])){
       $message[] = 'Product Already Added To Favorite';
    }else{
     //!Ürün yoksa veritabanına ekle
-      $sql = "INSERT INTO favorites (productname, productprice, productimage) VALUES(:product_name, :product_price, :product_image)";
+      $sql = "INSERT INTO favorites (productname, productprice, productimage,userid) VALUES(:product_name, :product_price, :product_image,:id)";
       $SORGU = $DB->prepare($sql);
 
       $SORGU->bindParam(':product_name',  $product_name);
       $SORGU->bindParam(':product_price',  $product_price);
-      $SORGU->bindParam(':product_image',  $product_image); 
+      $SORGU->bindParam(':product_image',  $product_image);
+      $SORGU->bindParam(':id', $user_id); 
       $SORGU->execute();
       $message[] = 'Product Added To Favorite Succesfully';
       //!İndex sayfasında sekronizasyonu sağlamak için sayfayı yenile

@@ -18,7 +18,9 @@
     </button>
     <?php
       require 'db.php';
-      $SORGU = $DB->prepare("SELECT * FROM favorites");
+      $user_id = $_SESSION['id'];
+      $SORGU = $DB->prepare("SELECT * FROM favorites WHERE userid = :id ");
+      $SORGU->bindParam(':id', $user_id);
       $SORGU->execute();
       $favorites = $SORGU->fetchAll(PDO::FETCH_ASSOC);
 
