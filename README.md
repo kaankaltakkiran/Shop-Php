@@ -9,9 +9,10 @@
 
  ## Kullanıcı Bilgileri
  
-Normal kullanıcısı= email= ahmet@gmail.com password= 123
-
-Admin kullanıcısısı= email= admin@gmail.com password= admin
+| Users               |Email                          |Password                         |
+|----------------|-------------------------------|-----------------------------|
+|User Ahmet          |`ahmet@gmail.com`              |`123`           |
+|Admin                |`admin@gmail.com`             |`admin`
 
  ## Yapılan İyileştirmeler?
 - [X] Frontend hataları giderildi.
@@ -20,5 +21,4 @@ Admin kullanıcısısı= email= admin@gmail.com password= admin
 
       
 ## Site Resimleri
-https://github.com/kaankaltakkiran/php_image
-
+https://github.com/kaankaltakkiran/php-proje-resimleri/tree/main/shop%20resimler
