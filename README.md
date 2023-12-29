@@ -21,4 +21,5 @@
 
       
 ## Site Resimleri
-https://github.com/kaankaltakkiran/php-proje-resimleri/tree/main/shop%20resimler
+
+https://github.com/kaankaltakkiran/php-proje-resimleri/tree/main/shop_resimler
